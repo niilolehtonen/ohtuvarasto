@@ -1,7 +1,12 @@
 from varasto import Varasto
 
+def print_varasto_info(varasto, nimi):
+    print(f"{nimi} getterit:")
+    print(f"saldo = {varasto.saldo}")
+    print(f"tilavuus = {varasto.tilavuus}")
+    print(f"paljonko_mahtuu = {varasto.paljonko_mahtuu()}")
 
-def main():
+def test_varasto_operations():
     mehua = Varasto(100.0)
     olutta = Varasto(100.0, 20.2)
 
@@ -9,10 +14,8 @@ def main():
     print(f"Mehuvarasto: {mehua}")
     print(f"Olutvarasto: {olutta}")
 
-    print("Olut getterit:")
-    print(f"saldo = {olutta.saldo}")
-    print(f"tilavuus = {olutta.tilavuus}")
-    print(f"paljonko_mahtuu = {olutta.paljonko_mahtuu()}")
+    print_varasto_info(olutta, "Olut")
+    print_varasto_info(mehua, "Mehu")
 
     print("Mehu setterit:")
     print("Lisätään 50.7")
@@ -22,37 +25,17 @@ def main():
     mehua.ota_varastosta(3.14)
     print(f"Mehuvarasto: {mehua}")
 
+def test_error_cases():
     print("Virhetilanteita:")
-    print("Varasto(-100.0);")
-    huono = Varasto(-100.0)
-    print(huono)
+    virhe_varasto = Varasto(-100.0)
+    print(virhe_varasto)
 
-    print("Varasto(100.0, -50.7)")
-    huono = Varasto(100.0, -50.7)
-    print(huono)
+    virhe_olutta = Varasto(100.0, -50.7)
+    print(virhe_olutta)
 
-    print(f"Olutvarasto: {olutta}")
-    print("olutta.lisaa_varastoon(1000.0)")
-    olutta.lisaa_varastoon(1000.0)
-    print(f"Olutvarasto: {olutta}")
-
-    print(f"Mehuvarasto: {mehua}")
-    print("mehua.lisaa_varastoon(-666.0)")
-    mehua.lisaa_varastoon(-666.0)
-    print(f"Mehuvarasto: {mehua}")
-
-    print(f"Olutvarasto: {olutta}")
-    print("olutta.ota_varastosta(1000.0)")
-    saatiin = olutta.ota_varastosta(1000.0)
-    print(f"saatiin {saatiin}")
-    print(f"Olutvarasto: {olutta}")
-
-    print(f"Mehuvarasto: {mehua}")
-    print("mehua.otaVarastosta(-32.9)")
-    saatiin = mehua.ota_varastosta(-32.9)
-    print(f"saatiin {saatiin}")
-    print(f"Mehuvarasto: {mehua}")
-
+def main():
+    test_varasto_operations()
+    test_error_cases()
 
 if __name__ == "__main__":
     main()
